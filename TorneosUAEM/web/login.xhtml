@@ -29,11 +29,11 @@
 
             <ui:define name="content">
                 <h:form>
-                    <h:outputLabel for="username">Nombre de usuario</h:outputLabel>
-                    <h:inputText id="username" size="10" maxlength="10" />
-                    <h:outputLabel for="password">Password</h:outputLabel>
-                    <h:inputText id="password" size="10" maxlength="10" />
-                    <h:commandButton id="submit" value="Enviar" action="login" />
+                    <h:outputLabel value="#{bundle.CreateStudentsLabel_username}" for="username" />
+                    <h:inputText id="username" value="#{studentsController.selected.username}" title="#{bundle.CreateStudentsTitle_username}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_username}"/>
+                    <h:outputLabel value="#{bundle.CreateStudentsLabel_password}" for="password" />
+                    <h:inputSecret id="password" value="#{studentsController.selected.password}" title="#{bundle.CreateStudentsTitle_password}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_password}"/>
+                    <h:commandButton id="submit" value="Ingresar" action="#{studentsController.sessionStart}" />
                 </h:form>
             </ui:define>
 

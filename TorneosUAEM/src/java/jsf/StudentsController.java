@@ -6,10 +6,16 @@ import jsf.util.PaginationHelper;
 import jpa.session.StudentsFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,6 +23,9 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 
 @Named("studentsController")
 @SessionScoped
@@ -107,6 +116,38 @@ public class StudentsController implements Serializable {
         }
     }
 
+    public String sessionStart(){
+        try{
+            FacesContext context = FacesContext.getCurrentInstance();
+            List<Students> stuList = getFacade().findAll();
+            for(Students student : stuList){
+                if(student.getUsername().equals(current.getUsername())){
+                    if(student.getPassword().equals(current.getPassword())){
+                        context.getExternalContext().getSessionMap().put("id", student.getId());
+                        context.getExternalContext().getSessionMap().put("user", student.getUsername());
+                        context.getExternalContext().getSessionMap().put("level", student.getLevel());
+                        if(student.getLevel() == 1){
+                             return "vistaAdmin?faces-redirect=true";
+                        }else{
+                             return "vistaUsuario?faces-redirect=true";
+                        }
+                    }
+                }
+            }
+            context.addMessage(null, new FacesMessage("Unknown login, try again"));
+        }catch (Exception e){
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            return "registro?faces-redirect=true";
+        }
+        return "registro?faces-redirect=true";
+    }
+    
+     public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "index?faces-redirect=true";
+    }
+
+    
     public String destroy() {
         current = (Students) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
