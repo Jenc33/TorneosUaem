@@ -70,13 +70,13 @@ public class DisciplinesController implements Serializable {
     public String prepareView() {
         current = (Disciplines) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "viewDiscipline";
     }
 
     public String prepareCreate() {
         current = new Disciplines();
         selectedItemIndex = -1;
-        return "Create";
+        return "ListDiscipline";
     }
 
     public String create() {
@@ -93,14 +93,14 @@ public class DisciplinesController implements Serializable {
     public String prepareEdit() {
         current = (Disciplines) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "EditDiscipline";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("DisciplinesUpdated"));
-            return "View";
+            return "viewDiscipline";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -113,7 +113,7 @@ public class DisciplinesController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        return "ListDiscipline";
     }
 
     public String destroyAndView() {

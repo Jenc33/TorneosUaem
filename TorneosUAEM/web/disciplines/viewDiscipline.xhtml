@@ -44,14 +44,10 @@
                 <h:commandLink action="#{disciplinesController.destroyAndView}" value="#{bundle.ViewDisciplinesDestroyLink}"/>
                 <br />
                 <br />
-                <h:link outcome="Edit" value="#{bundle.ViewDisciplinesEditLink}"/>
-                <br />
-                <h:commandLink action="#{disciplinesController.prepareCreate}" value="#{bundle.ViewDisciplinesCreateLink}" />
-                <br />
-                <h:commandLink action="#{disciplinesController.prepareList}" value="#{bundle.ViewDisciplinesShowAllLink}"/>
+                <h:link outcome="EditDiscipline" value="#{bundle.ViewDisciplinesEditLink}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.ViewDisciplinesIndexLink}"/>
+                <h:link outcome="ListDiscipline" value="#{bundle.ViewDisciplinesIndexLink}"/>
 
             </h:form>
             </ui:define>
