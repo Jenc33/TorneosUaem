@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTournamentsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{tournamentsController.selected.id}" title="#{bundle.CreateTournamentsTitle_id}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{tournamentsController.selected.name}" title="#{bundle.CreateTournamentsTitle_name}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{tournamentsController.selected.description}" title="#{bundle.CreateTournamentsTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_inscriptionStartDate}" for="inscriptionStartDate" />
+                    <h:inputText id="inscriptionStartDate" value="#{tournamentsController.selected.inscriptionStartDate}" title="#{bundle.CreateTournamentsTitle_inscriptionStartDate}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_inscriptionStartDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_inscriptionEndDate}" for="inscriptionEndDate" />
+                    <h:inputText id="inscriptionEndDate" value="#{tournamentsController.selected.inscriptionEndDate}" title="#{bundle.CreateTournamentsTitle_inscriptionEndDate}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_inscriptionEndDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_tournamentStartDate}" for="tournamentStartDate" />
+                    <h:inputText id="tournamentStartDate" value="#{tournamentsController.selected.tournamentStartDate}" title="#{bundle.CreateTournamentsTitle_tournamentStartDate}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_tournamentStartDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_tournamentEndDate}" for="tournamentEndDate" />
+                    <h:inputText id="tournamentEndDate" value="#{tournamentsController.selected.tournamentEndDate}" title="#{bundle.CreateTournamentsTitle_tournamentEndDate}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_tournamentEndDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_idDisciplina}" for="idDisciplina" />
+                    <h:selectOneMenu id="idDisciplina" value="#{tournamentsController.selected.idDisciplina}" title="#{bundle.CreateTournamentsTitle_idDisciplina}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_idDisciplina}">
+                        <f:selectItems value="#{disciplinesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tournamentsController.create}" value="#{bundle.CreateTournamentsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tournamentsController.prepareList}" value="#{bundle.CreateTournamentsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTournamentsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

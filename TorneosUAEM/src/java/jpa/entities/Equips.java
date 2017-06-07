@@ -10,6 +10,8 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -38,8 +40,8 @@ public class Equips implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
@@ -53,7 +55,7 @@ public class Equips implements Serializable {
     private String name;
     @JoinColumn(name = "ID_TOURNAMENT", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Torunaments idTournament;
+    private Tournaments idTournament;
     @OneToMany(mappedBy = "idEquip")
     private Collection<Students> studentsCollection;
 
@@ -94,11 +96,11 @@ public class Equips implements Serializable {
         this.name = name;
     }
 
-    public Torunaments getIdTournament() {
+    public Tournaments getIdTournament() {
         return idTournament;
     }
 
-    public void setIdTournament(Torunaments idTournament) {
+    public void setIdTournament(Tournaments idTournament) {
         this.idTournament = idTournament;
     }
 

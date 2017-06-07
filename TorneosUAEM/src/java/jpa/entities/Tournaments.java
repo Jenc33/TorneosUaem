@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,23 +33,23 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ingjo
  */
 @Entity
-@Table(name = "TORUNAMENTS")
+@Table(name = "TOURNAMENTS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Torunaments.findAll", query = "SELECT t FROM Torunaments t")
-    , @NamedQuery(name = "Torunaments.findById", query = "SELECT t FROM Torunaments t WHERE t.id = :id")
-    , @NamedQuery(name = "Torunaments.findByName", query = "SELECT t FROM Torunaments t WHERE t.name = :name")
-    , @NamedQuery(name = "Torunaments.findByDescription", query = "SELECT t FROM Torunaments t WHERE t.description = :description")
-    , @NamedQuery(name = "Torunaments.findByInscriptionStartDate", query = "SELECT t FROM Torunaments t WHERE t.inscriptionStartDate = :inscriptionStartDate")
-    , @NamedQuery(name = "Torunaments.findByInscriptionEndDate", query = "SELECT t FROM Torunaments t WHERE t.inscriptionEndDate = :inscriptionEndDate")
-    , @NamedQuery(name = "Torunaments.findByTournamentStartDate", query = "SELECT t FROM Torunaments t WHERE t.tournamentStartDate = :tournamentStartDate")
-    , @NamedQuery(name = "Torunaments.findByTounamentEndDate", query = "SELECT t FROM Torunaments t WHERE t.tounamentEndDate = :tounamentEndDate")})
-public class Torunaments implements Serializable {
+    @NamedQuery(name = "Tournaments.findAll", query = "SELECT t FROM Tournaments t")
+    , @NamedQuery(name = "Tournaments.findById", query = "SELECT t FROM Tournaments t WHERE t.id = :id")
+    , @NamedQuery(name = "Tournaments.findByName", query = "SELECT t FROM Tournaments t WHERE t.name = :name")
+    , @NamedQuery(name = "Tournaments.findByDescription", query = "SELECT t FROM Tournaments t WHERE t.description = :description")
+    , @NamedQuery(name = "Tournaments.findByInscriptionStartDate", query = "SELECT t FROM Tournaments t WHERE t.inscriptionStartDate = :inscriptionStartDate")
+    , @NamedQuery(name = "Tournaments.findByInscriptionEndDate", query = "SELECT t FROM Tournaments t WHERE t.inscriptionEndDate = :inscriptionEndDate")
+    , @NamedQuery(name = "Tournaments.findByTournamentStartDate", query = "SELECT t FROM Tournaments t WHERE t.tournamentStartDate = :tournamentStartDate")
+    , @NamedQuery(name = "Tournaments.findByTournamentEndDate", query = "SELECT t FROM Tournaments t WHERE t.tournamentEndDate = :tournamentEndDate")})
+public class Tournaments implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
@@ -75,29 +77,29 @@ public class Torunaments implements Serializable {
     private Date tournamentStartDate;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TOUNAMENT_END_DATE")
+    @Column(name = "TOURNAMENT_END_DATE")
     @Temporal(TemporalType.DATE)
-    private Date tounamentEndDate;
+    private Date tournamentEndDate;
     @JoinColumn(name = "ID_DISCIPLINA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Disciplines idDisciplina;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTournament")
     private Collection<Equips> equipsCollection;
 
-    public Torunaments() {
+    public Tournaments() {
     }
 
-    public Torunaments(Integer id) {
+    public Tournaments(Integer id) {
         this.id = id;
     }
 
-    public Torunaments(Integer id, String name, Date inscriptionStartDate, Date inscriptionEndDate, Date tournamentStartDate, Date tounamentEndDate) {
+    public Tournaments(Integer id, String name, Date inscriptionStartDate, Date inscriptionEndDate, Date tournamentStartDate, Date tournamentEndDate) {
         this.id = id;
         this.name = name;
         this.inscriptionStartDate = inscriptionStartDate;
         this.inscriptionEndDate = inscriptionEndDate;
         this.tournamentStartDate = tournamentStartDate;
-        this.tounamentEndDate = tounamentEndDate;
+        this.tournamentEndDate = tournamentEndDate;
     }
 
     public Integer getId() {
@@ -148,12 +150,12 @@ public class Torunaments implements Serializable {
         this.tournamentStartDate = tournamentStartDate;
     }
 
-    public Date getTounamentEndDate() {
-        return tounamentEndDate;
+    public Date getTournamentEndDate() {
+        return tournamentEndDate;
     }
 
-    public void setTounamentEndDate(Date tounamentEndDate) {
-        this.tounamentEndDate = tounamentEndDate;
+    public void setTournamentEndDate(Date tournamentEndDate) {
+        this.tournamentEndDate = tournamentEndDate;
     }
 
     public Disciplines getIdDisciplina() {
@@ -183,10 +185,10 @@ public class Torunaments implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Torunaments)) {
+        if (!(object instanceof Tournaments)) {
             return false;
         }
-        Torunaments other = (Torunaments) object;
+        Tournaments other = (Tournaments) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -195,7 +197,7 @@ public class Torunaments implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.Torunaments[ id=" + id + " ]";
+        return "jpa.entities.Tournaments[ id=" + id + " ]";
     }
     
 }

@@ -1,9 +1,9 @@
 package jsf;
 
-import jpa.entities.Torunaments;
+import jpa.entities.Tournaments;
 import jsf.util.JsfUtil;
 import jsf.util.PaginationHelper;
-import jpa.session.TorunamentsFacade;
+import jpa.session.TournamentsFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,29 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("torunamentsController")
+@Named("tournamentsController")
 @SessionScoped
-public class TorunamentsController implements Serializable {
+public class TournamentsController implements Serializable {
 
-    private Torunaments current;
+    private Tournaments current;
     private DataModel items = null;
     @EJB
-    private jpa.session.TorunamentsFacade ejbFacade;
+    private jpa.session.TournamentsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public TorunamentsController() {
+    public TournamentsController() {
     }
 
-    public Torunaments getSelected() {
+    public Tournaments getSelected() {
         if (current == null) {
-            current = new Torunaments();
+            current = new Tournaments();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private TorunamentsFacade getFacade() {
+    private TournamentsFacade getFacade() {
         return ejbFacade;
     }
 
@@ -68,13 +68,13 @@ public class TorunamentsController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Torunaments) getItems().getRowData();
+        current = (Tournaments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Torunaments();
+        current = new Tournaments();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -82,7 +82,7 @@ public class TorunamentsController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TorunamentsCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TournamentsCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
@@ -91,7 +91,7 @@ public class TorunamentsController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Torunaments) getItems().getRowData();
+        current = (Tournaments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,7 +99,7 @@ public class TorunamentsController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TorunamentsUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TournamentsUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
@@ -108,7 +108,7 @@ public class TorunamentsController implements Serializable {
     }
 
     public String destroy() {
-        current = (Torunaments) getItems().getRowData();
+        current = (Tournaments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,7 +132,7 @@ public class TorunamentsController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TorunamentsDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TournamentsDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -188,21 +188,21 @@ public class TorunamentsController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Torunaments getTorunaments(java.lang.Integer id) {
+    public Tournaments getTournaments(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Torunaments.class)
-    public static class TorunamentsControllerConverter implements Converter {
+    @FacesConverter(forClass = Tournaments.class)
+    public static class TournamentsControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TorunamentsController controller = (TorunamentsController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "torunamentsController");
-            return controller.getTorunaments(getKey(value));
+            TournamentsController controller = (TournamentsController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tournamentsController");
+            return controller.getTournaments(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -222,11 +222,11 @@ public class TorunamentsController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Torunaments) {
-                Torunaments o = (Torunaments) object;
+            if (object instanceof Tournaments) {
+                Tournaments o = (Tournaments) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Torunaments.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Tournaments.class.getName());
             }
         }
 

@@ -23,7 +23,7 @@
                     <h:inputText id="name" value="#{equipsController.selected.name}" title="#{bundle.CreateEquipsTitle_name}" required="true" requiredMessage="#{bundle.CreateEquipsRequiredMessage_name}"/>
                     <h:outputLabel value="#{bundle.CreateEquipsLabel_idTournament}" for="idTournament" />
                     <h:selectOneMenu id="idTournament" value="#{equipsController.selected.idTournament}" title="#{bundle.CreateEquipsTitle_idTournament}" required="true" requiredMessage="#{bundle.CreateEquipsRequiredMessage_idTournament}">
-                        <f:selectItems value="#{torunamentsController.itemsAvailableSelectOne}"/>
+                        <f:selectItems value="#{tournamentsController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />

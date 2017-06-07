@@ -8,14 +8,14 @@ package jpa.session;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import jpa.entities.Torunaments;
+import jpa.entities.Tournaments;
 
 /**
  *
  * @author ingjo
  */
 @Stateless
-public class TorunamentsFacade extends AbstractFacade<Torunaments> {
+public class TournamentsFacade extends AbstractFacade<Tournaments> {
 
     @PersistenceContext(unitName = "TorneosUAEMPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class TorunamentsFacade extends AbstractFacade<Torunaments> {
         return em;
     }
 
-    public TorunamentsFacade() {
-        super(Torunaments.class);
+    public TournamentsFacade() {
+        super(Tournaments.class);
     }
     
 }

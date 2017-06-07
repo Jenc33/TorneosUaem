@@ -31,14 +31,12 @@
             <ui:define name="content">
                 <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateStudentsLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{studentsController.selected.id}" title="#{bundle.CreateStudentsTitle_id}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundle.CreateStudentsLabel_username}" for="username" />
                     <h:inputText id="username" value="#{studentsController.selected.username}" title="#{bundle.CreateStudentsTitle_username}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_username}"/>
                     <h:outputLabel value="#{bundle.CreateStudentsLabel_password}" for="password" />
-                    <h:inputText id="password" value="#{studentsController.selected.password}" title="#{bundle.CreateStudentsTitle_password}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_password}"/>
-                    <h:outputLabel value="#{bundle.CreateStudentsLabel_level}" for="level" />
-                    <h:inputText id="level" value="#{studentsController.selected.level}" title="#{bundle.CreateStudentsTitle_level}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_level}"/>
+                    <h:inputSecret id="password" value="#{studentsController.selected.password}" title="#{bundle.CreateStudentsTitle_password}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_password}"/>
+                    <br />
+                    <h:inputHidden id="level" value="0" required="true" />
                     <h:outputLabel value="#{bundle.CreateStudentsLabel_name}" for="name" />
                     <h:inputText id="name" value="#{studentsController.selected.name}" title="#{bundle.CreateStudentsTitle_name}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_name}"/>
                     <h:outputLabel value="#{bundle.CreateStudentsLabel_lastName}" for="lastName" />
@@ -47,10 +45,7 @@
                     <h:inputText id="secondLastName" value="#{studentsController.selected.secondLastName}" title="#{bundle.CreateStudentsTitle_secondLastName}" />
                     <h:outputLabel value="#{bundle.CreateStudentsLabel_accountNumber}" for="accountNumber" />
                     <h:inputText id="accountNumber" value="#{studentsController.selected.accountNumber}" title="#{bundle.CreateStudentsTitle_accountNumber}" required="true" requiredMessage="#{bundle.CreateStudentsRequiredMessage_accountNumber}"/>
-                    <h:outputLabel value="#{bundle.CreateStudentsLabel_idEquip}" for="idEquip" />
-                    <h:selectOneMenu id="idEquip" value="#{studentsController.selected.idEquip}" title="#{bundle.CreateStudentsTitle_idEquip}" >
-                        <f:selectItems value="#{equipsController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{studentsController.create}" value="#{bundle.CreateStudentsSaveLink}" />

@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,8 +40,8 @@ public class Disciplines implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
@@ -55,7 +57,7 @@ public class Disciplines implements Serializable {
     @Column(name = "NO_MEMBERS")
     private int noMembers;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDisciplina")
-    private Collection<Torunaments> torunamentsCollection;
+    private Collection<Tournaments> tournamentsCollection;
 
     public Disciplines() {
     }
@@ -103,12 +105,12 @@ public class Disciplines implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Torunaments> getTorunamentsCollection() {
-        return torunamentsCollection;
+    public Collection<Tournaments> getTournamentsCollection() {
+        return tournamentsCollection;
     }
 
-    public void setTorunamentsCollection(Collection<Torunaments> torunamentsCollection) {
-        this.torunamentsCollection = torunamentsCollection;
+    public void setTournamentsCollection(Collection<Tournaments> tournamentsCollection) {
+        this.tournamentsCollection = tournamentsCollection;
     }
 
     @Override
