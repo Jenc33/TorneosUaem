@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                View
+            </ui:define>
+
+            <ui:define name="header">
+                eSports Uaemex
+            </ui:define>
+
+            <ui:define name="nav">
+                
+            </ui:define>
+
+            <ui:define name="title2">
+                Vista de Disciplina
+            </ui:define>
+
+            <ui:define name="sub-title">
+                
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewDisciplinesLabel_id}"/>
+                    <h:outputText value="#{disciplinesController.selected.id}" title="#{bundle.ViewDisciplinesTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewDisciplinesLabel_name}"/>
+                    <h:outputText value="#{disciplinesController.selected.name}" title="#{bundle.ViewDisciplinesTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewDisciplinesLabel_description}"/>
+                    <h:outputText value="#{disciplinesController.selected.description}" title="#{bundle.ViewDisciplinesTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewDisciplinesLabel_noMembers}"/>
+                    <h:outputText value="#{disciplinesController.selected.noMembers}" title="#{bundle.ViewDisciplinesTitle_noMembers}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{disciplinesController.destroyAndView}" value="#{bundle.ViewDisciplinesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewDisciplinesEditLink}"/>
+                <br />
+                <h:commandLink action="#{disciplinesController.prepareCreate}" value="#{bundle.ViewDisciplinesCreateLink}" />
+                <br />
+                <h:commandLink action="#{disciplinesController.prepareList}" value="#{bundle.ViewDisciplinesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewDisciplinesIndexLink}"/>
+
+            </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
