@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateDisciplinesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateDisciplinesLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{disciplinesController.selected.id}" title="#{bundle.CreateDisciplinesTitle_id}" required="true" requiredMessage="#{bundle.CreateDisciplinesRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateDisciplinesLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{disciplinesController.selected.name}" title="#{bundle.CreateDisciplinesTitle_name}" required="true" requiredMessage="#{bundle.CreateDisciplinesRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.CreateDisciplinesLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{disciplinesController.selected.description}" title="#{bundle.CreateDisciplinesTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateDisciplinesLabel_noMembers}" for="noMembers" />
+                    <h:inputText id="noMembers" value="#{disciplinesController.selected.noMembers}" title="#{bundle.CreateDisciplinesTitle_noMembers}" required="true" requiredMessage="#{bundle.CreateDisciplinesRequiredMessage_noMembers}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{disciplinesController.create}" value="#{bundle.CreateDisciplinesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{disciplinesController.prepareList}" value="#{bundle.CreateDisciplinesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateDisciplinesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

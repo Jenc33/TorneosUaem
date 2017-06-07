@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEquipsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEquipsLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{equipsController.selected.id}" title="#{bundle.EditEquipsTitle_id}" required="true" requiredMessage="#{bundle.EditEquipsRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditEquipsLabel_idCapitain}" for="idCapitain" />
+                    <h:inputText id="idCapitain" value="#{equipsController.selected.idCapitain}" title="#{bundle.EditEquipsTitle_idCapitain}" required="true" requiredMessage="#{bundle.EditEquipsRequiredMessage_idCapitain}"/>
+                    <h:outputLabel value="#{bundle.EditEquipsLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{equipsController.selected.name}" title="#{bundle.EditEquipsTitle_name}" required="true" requiredMessage="#{bundle.EditEquipsRequiredMessage_name}"/>
+                    <h:outputLabel value="#{bundle.EditEquipsLabel_idTournament}" for="idTournament" />
+                    <h:selectOneMenu id="idTournament" value="#{equipsController.selected.idTournament}" title="#{bundle.EditEquipsTitle_idTournament}" required="true" requiredMessage="#{bundle.EditEquipsRequiredMessage_idTournament}">
+                        <f:selectItems value="#{torunamentsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{equipsController.update}" value="#{bundle.EditEquipsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditEquipsViewLink}"/>
+                <br />
+                <h:commandLink action="#{equipsController.prepareList}" value="#{bundle.EditEquipsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditEquipsIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

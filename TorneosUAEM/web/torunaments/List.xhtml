@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTorunamentsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTorunamentsEmpty}" rendered="#{torunamentsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{torunamentsController.items.rowCount > 0}">
+                    <h:outputText value="#{torunamentsController.pagination.pageFirstItem + 1}..#{torunamentsController.pagination.pageLastItem + 1}/#{torunamentsController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{torunamentsController.previous}" value="#{bundle.Previous} #{torunamentsController.pagination.pageSize}" rendered="#{torunamentsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{torunamentsController.next}" value="#{bundle.Next} #{torunamentsController.pagination.pageSize}" rendered="#{torunamentsController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{torunamentsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTorunamentsTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTorunamentsTitle_name}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTorunamentsTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTorunamentsTitle_inscriptionStartDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.inscriptionStartDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTorunamentsTitle_inscriptionEndDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.inscriptionEndDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTorunamentsTitle_tournamentStartDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tournamentStartDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTorunamentsTitle_tounamentEndDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tounamentEndDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTorunamentsTitle_idDisciplina}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDisciplina}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{torunamentsController.prepareView}" value="#{bundle.ListTorunamentsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{torunamentsController.prepareEdit}" value="#{bundle.ListTorunamentsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{torunamentsController.destroy}" value="#{bundle.ListTorunamentsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{torunamentsController.prepareCreate}" value="#{bundle.ListTorunamentsCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTorunamentsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
