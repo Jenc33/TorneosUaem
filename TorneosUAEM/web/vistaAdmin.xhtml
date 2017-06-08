@@ -2,8 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view>
+        
+    <f:event type="preRenderView" listener="#{studentsController.checkLogin}"/>
     <body>
 
         <ui:composition template="./template.xhtml">
@@ -17,14 +20,16 @@
             </ui:define>
 
             <ui:define name="nav">
+                <h:form>
                 <nav id="nav">
                     <ul>
-                        <li> <h:link value="Home" outcome="vistaAdmin"></h:link></li>
+                        <li> <h:link value="Home" outcome="index"></h:link></li>
                         <li> <h:link value="Disciplinas" outcome="disciplines/ListDiscipline"></h:link> </li>
                         <li> <h:link value="Torneos" outcome="tournaments/ListTournament"></h:link> </li>
-                        <li> <h:link value="Logout" onclick="#{StudentsController.logout}"></h:link> </li>
+                        <li> <h:commandLink value="Logout" action="#{studentsController.sessionStop}"></h:commandLink> </li>
                     </ul>
                 </nav>
+                    </h:form>
             </ui:define>
 
             <ui:define name="title2">
@@ -42,4 +47,5 @@
         </ui:composition>
 
     </body>
+    </f:view>
 </html>

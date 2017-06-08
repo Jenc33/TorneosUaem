@@ -15,11 +15,13 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ComponentSystemEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -37,6 +39,8 @@ public class StudentsController implements Serializable {
     private jpa.session.StudentsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private boolean loggedIn;
+    private boolean loggedIn2;
 
     public StudentsController() {
     }
@@ -116,38 +120,71 @@ public class StudentsController implements Serializable {
         }
     }
 
-    public String sessionStart(){
-        try{
+    public String sessionStart() {
+        try {
             FacesContext context = FacesContext.getCurrentInstance();
             List<Students> stuList = getFacade().findAll();
-            for(Students student : stuList){
-                if(student.getUsername().equals(current.getUsername())){
-                    if(student.getPassword().equals(current.getPassword())){
+            for (Students student : stuList) {
+                if (student.getUsername().equals(current.getUsername())) {
+                    if (student.getPassword().equals(current.getPassword())) {
                         context.getExternalContext().getSessionMap().put("id", student.getId());
                         context.getExternalContext().getSessionMap().put("user", student.getUsername());
                         context.getExternalContext().getSessionMap().put("level", student.getLevel());
-                        if(student.getLevel() == 1){
-                             return "vistaAdmin?faces-redirect=true";
-                        }else{
-                             return "vistaUsuario?faces-redirect=true";
+                        if (student.getLevel() == 1) {
+                            loggedIn = true;
+                            return "vistaAdmin?faces-redirect=true";
+                        } else {
+                            loggedIn2 = true;
+                            return "vistaUsuario?faces-redirect=true";
                         }
                     }
                 }
             }
+            loggedIn = false;
+            loggedIn2 = false;
             context.addMessage(null, new FacesMessage("Unknown login, try again"));
-        }catch (Exception e){
+        } catch (Exception e) {
+            loggedIn = false;
+            loggedIn2 = false;
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
             return "registro?faces-redirect=true";
         }
         return "registro?faces-redirect=true";
     }
-    
-     public String logout() {
+
+    public String sessionStop() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "index?faces-redirect=true";
+        loggedIn = false;
+        return "login?faces-redirect=true";
+    }
+    
+    public String sessionStop2() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        loggedIn2 = false;
+        return "login?faces-redirect=true";
     }
 
+    public void checkLogin(ComponentSystemEvent event) {
+        if (!loggedIn) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) context.
+                    getApplication().
+                    getNavigationHandler();
+            handler.performNavigation("login");
+        }
+    }
     
+    public void checkLogin2(ComponentSystemEvent event) {
+        if (!loggedIn2) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) context.
+                    getApplication().
+                    getNavigationHandler();
+
+            handler.performNavigation("login");
+        }
+    }
+
     public String destroy() {
         current = (Students) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
