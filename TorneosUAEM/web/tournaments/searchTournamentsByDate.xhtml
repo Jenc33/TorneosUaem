@@ -34,7 +34,7 @@
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
                     <div align="center">
-                
+
                     </div>
                     <br />
                     <br />
@@ -44,72 +44,88 @@
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:inputText>
                         <h:commandLink action="#{tournamentsController.Items2}" value="#{bundle.CreateTournamentsSaveLink}" />
-                    
-                    <h:outputText escape="false" value="#{bundle.ListTournamentsEmpty}" rendered="#{tournamentsController.items.rowCount == 0}"/>
-                    <h:panelGroup rendered="#{tournamentsController.items.rowCount > 0}">
-                        <h:dataTable value="#{tournamentsController.items2}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 0px">
-                            <h:column>
-                                <div align="center">
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListTournamentsTitle_name}"/>
-                                    </f:facet>
+
+                        <h:outputText escape="false" value="#{bundle.ListTournamentsEmpty}" rendered="#{tournamentsController.items.rowCount == 0}"/>
+                        <h:panelGroup rendered="#{tournamentsController.items.rowCount > 0}">
+                            <h:dataTable value="#{tournamentsController.items2}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 0px">
+
+                                <h:column>
+                                    <div align="center">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListTournamentsTitle_id}"/>
+                                        </f:facet>
+                                        <br />
+                                        <h:outputText value="#{item.id}"/>
+                                    </div>
+                                </h:column>
+
+                                <h:column>
+                                    <div align="center">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListTournamentsTitle_name}"/>
+                                        </f:facet>
+                                        <br />
+                                        <h:outputText value="#{item.name}"/>
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <div align="center">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListTournamentsTitle_inscriptionStartDate}"/>
+                                        </f:facet>
+                                        <br />
+                                        <h:outputText value="#{item.inscriptionStartDate}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <div align="center">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListTournamentsTitle_inscriptionEndDate}"/>
+                                        </f:facet>
+                                        <br />
+                                        <h:outputText value="#{item.inscriptionEndDate}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <div align="center">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListTournamentsTitle_tournamentStartDate}"/>
+                                        </f:facet>
+                                        <br />
+                                        <h:outputText value="#{item.tournamentStartDate}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <div align="center">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListTournamentsTitle_tournamentEndDate}"/>
+                                        </f:facet>
+                                        <br />
+                                        <h:outputText value="#{item.tournamentEndDate}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </div>
+                                </h:column>
+                                <h:column>
                                     <br />
-                                    <h:outputText value="#{item.name}"/>
-                                </div>
-                            </h:column>
-                            <h:column>
-                                <div align="center">
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListTournamentsTitle_inscriptionStartDate}"/>
-                                    </f:facet>
-                                    <br />
-                                    <h:outputText value="#{item.inscriptionStartDate}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText>
-                                </div>
-                            </h:column>
-                            <h:column>
-                                <div align="center">
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListTournamentsTitle_inscriptionEndDate}"/>
-                                    </f:facet>
-                                    <br />
-                                    <h:outputText value="#{item.inscriptionEndDate}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText>
-                                </div>
-                            </h:column>
-                            <h:column>
-                                <div align="center">
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListTournamentsTitle_tournamentStartDate}"/>
-                                    </f:facet>
-                                    <br />
-                                    <h:outputText value="#{item.tournamentStartDate}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText>
-                                </div>
-                            </h:column>
-                            <h:column>
-                                <div align="center">
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListTournamentsTitle_tournamentEndDate}"/>
-                                    </f:facet>
-                                    <br />
-                                    <h:outputText value="#{item.tournamentEndDate}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText>
-                                </div>
-                            </h:column>
-                        </h:dataTable>
-                    </h:panelGroup>
-                    <br />
-                    <br />
-                    <div align="center">
-                        <h:link outcome="/index" value="#{bundle.ListTournamentsIndexLink}"/>
-                    </div>
-                </h:form>
+                                    <h:commandLink action="#{tournamentsController.prepareRules}" value="#{bundle.ListTournamentsViewLink}"/>
+                                    <h:outputText value=" "/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:panelGroup>
+                        <br />
+                        <br />
+                        <div align="center">
+                            <h:link outcome="/index" value="#{bundle.ListTournamentsIndexLink}"/>
+                        </div>
                     </h:form>
+                </h:form>
             </ui:define>
 
         </ui:composition>

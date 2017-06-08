@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import jpa.entities.Disciplines;
 import jpa.entities.Tournaments;
 
 /**
@@ -56,11 +57,27 @@ public abstract class AbstractFacade<T> {
         return getEntityManager().createQuery(cq).getResultList();
     }
     
-    public List<Tournaments> findDiscipline(String id) {
+    public List<Tournaments> findDiscipline(String name) {
+        javax.persistence.criteria.CriteriaQuery <Disciplines> cq = getEntityManager().getCriteriaBuilder().createQuery(Disciplines.class);
+        Root<Disciplines> c = cq.from(Disciplines.class);
+        cq.select(c);
+        Predicate p = getEntityManager().getCriteriaBuilder().equal(c.get("name"), name);
+        cq.where(p);
+        Disciplines d = getEntityManager().createQuery(cq).getResultList().get(0);
+        
+        javax.persistence.criteria.CriteriaQuery <Tournaments> ct = getEntityManager().getCriteriaBuilder().createQuery(Tournaments.class);
+        Root<Tournaments> t = ct.from(Tournaments.class);
+        ct.select(t);
+        Predicate pt = getEntityManager().getCriteriaBuilder().equal(t.get("idDisciplina"), d.getId());
+        ct.where(pt);
+        return getEntityManager().createQuery(ct).getResultList();
+    }
+    
+    public List<Tournaments> findName(String name) {
         javax.persistence.criteria.CriteriaQuery <Tournaments> cq = getEntityManager().getCriteriaBuilder().createQuery(Tournaments.class);
         Root<Tournaments> c = cq.from(Tournaments.class);
         cq.select(c);
-        Predicate p = getEntityManager().getCriteriaBuilder().equal(c.get("inscriptionStartDate"), id);
+        Predicate p = getEntityManager().getCriteriaBuilder().equal(c.get("name"), name);
         cq.where(p);
         return getEntityManager().createQuery(cq).getResultList();
     }

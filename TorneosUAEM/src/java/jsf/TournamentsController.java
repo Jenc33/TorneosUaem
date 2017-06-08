@@ -162,15 +162,26 @@ public class TournamentsController implements Serializable {
         }
         return items;
     }
-    
+
     public List<Tournaments> getItems2() {
         List<Tournaments> t = getFacade().findDate("2017/06/07");
         return t;
     }
-    
+
     public List<Tournaments> getItems3() {
-        List<Tournaments> t = getFacade().findDate("DotA 2");
+        List<Tournaments> t = getFacade().findDiscipline("League of Legends");
         return t;
+    }
+
+    public List<Tournaments> getItems4() {
+        List<Tournaments> t = getFacade().findName("Torneo Dota 2");
+        return t;
+    }
+
+    public String prepareRules() {
+        current = (Tournaments) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return "viewRules";
     }
 
     private void recreateModel() {
