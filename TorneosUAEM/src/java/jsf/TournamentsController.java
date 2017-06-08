@@ -6,6 +6,7 @@ import jsf.util.PaginationHelper;
 import jpa.session.TournamentsFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -158,6 +159,16 @@ public class TournamentsController implements Serializable {
             items = getPagination().createPageDataModel();
         }
         return items;
+    }
+    
+    public List<Tournaments> getItems2() {
+        List<Tournaments> t = getFacade().findDate("2017/06/07");
+        return t;
+    }
+    
+    public List<Tournaments> getItems3() {
+        List<Tournaments> t = getFacade().findDate("DotA 2");
+        return t;
     }
 
     private void recreateModel() {
