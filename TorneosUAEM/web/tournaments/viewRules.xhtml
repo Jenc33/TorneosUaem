@@ -22,7 +22,7 @@
             </ui:define>
 
             <ui:define name="title2">
-                
+
             </ui:define>
 
             <ui:define name="sub-title">
@@ -30,16 +30,16 @@
             </ui:define>
 
             <ui:define name="content">
-                
-                    <h:form>
-                        <h:panelGrid bgcolor="" columns="2">
-                            <h:outputText value="#{bundle.ViewTournamentsLabel_name}"/>
-                            <h:outputText value="#{tournamentsController.selected.name}" title="#{bundle.ViewTournamentsTitle_name}"/>
-                            <h:outputText value="#{bundle.ViewTournamentsLabel_description}"/>
-                            <h:outputText value="#{tournamentsController.selected.description}" title="#{bundle.ViewTournamentsTitle_description}"/>
-                         </h:panelGrid>
-                    </h:form>
-                
+
+                <h:form>
+                    <h:panelGrid bgcolor="" columns="2">
+                        <h:outputText value="#{bundle.ViewTournamentsLabel_name}"/>
+                        <h:outputText value="#{tournamentsController.selected.name}" title="#{bundle.ViewTournamentsTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewTournamentsLabel_description}"/>
+                        <h:outputText value="#{tournamentsController.selected.description}" title="#{bundle.ViewTournamentsTitle_description}"/>
+                    </h:panelGrid>
+                </h:form>
+                <h:link outcome="searchTournaments" value="#{bundle.ListTournamentsIndexLink}"/>               
             </ui:define>
 
         </ui:composition>

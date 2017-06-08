@@ -68,7 +68,8 @@ public abstract class AbstractFacade<T> {
         javax.persistence.criteria.CriteriaQuery <Tournaments> ct = getEntityManager().getCriteriaBuilder().createQuery(Tournaments.class);
         Root<Tournaments> t = ct.from(Tournaments.class);
         ct.select(t);
-        Predicate pt = getEntityManager().getCriteriaBuilder().equal(t.get("idDisciplina"), d.getId());
+        Predicate pt = getEntityManager().getCriteriaBuilder().equal(t.get("idDisciplina").get("id"), d.getId());
+        System.out.println("MIRA: "+t.get("idDisciplina").get("id")+"  "+d.getId());
         ct.where(pt);
         return getEntityManager().createQuery(ct).getResultList();
     }
