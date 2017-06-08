@@ -76,7 +76,7 @@ public class TournamentsController implements Serializable {
     public String prepareCreate() {
         current = new Tournaments();
         selectedItemIndex = -1;
-        return "ListTournament";
+        return "CreateTournament";
     }
 
     public String create() {
