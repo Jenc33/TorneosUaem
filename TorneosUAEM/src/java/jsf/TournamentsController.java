@@ -70,13 +70,13 @@ public class TournamentsController implements Serializable {
     public String prepareView() {
         current = (Tournaments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "ViewTournament";
     }
 
     public String prepareCreate() {
         current = new Tournaments();
         selectedItemIndex = -1;
-        return "Create";
+        return "ListTournament";
     }
 
     public String create() {
@@ -93,14 +93,14 @@ public class TournamentsController implements Serializable {
     public String prepareEdit() {
         current = (Tournaments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "EditTournament";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TournamentsUpdated"));
-            return "View";
+            return "ViewTournament";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -113,7 +113,7 @@ public class TournamentsController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        return "ListTournament";
     }
 
     public String destroyAndView() {
@@ -121,11 +121,11 @@ public class TournamentsController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return "ViewTournament";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return "ListTournament";
         }
     }
 
@@ -171,13 +171,13 @@ public class TournamentsController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return "ListTournament";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return "ListTournament";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Torneo
+            </ui:define>
+
+            <ui:define name="header">
+                eSports Uaemex
+            </ui:define>
+
+            <ui:define name="nav">
+                
+            </ui:define>
+
+            <ui:define name="title2">
+                Vista Torneo
+            </ui:define>
+
+            <ui:define name="sub-title">
+                
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTournamentsLabel_id}"/>
+                    <h:outputText value="#{tournamentsController.selected.id}" title="#{bundle.ViewTournamentsTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewTournamentsLabel_name}"/>
+                    <h:outputText value="#{tournamentsController.selected.name}" title="#{bundle.ViewTournamentsTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewTournamentsLabel_description}"/>
+                    <h:outputText value="#{tournamentsController.selected.description}" title="#{bundle.ViewTournamentsTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewTournamentsLabel_inscriptionStartDate}"/>
+                    <h:outputText value="#{tournamentsController.selected.inscriptionStartDate}" title="#{bundle.ViewTournamentsTitle_inscriptionStartDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTournamentsLabel_inscriptionEndDate}"/>
+                    <h:outputText value="#{tournamentsController.selected.inscriptionEndDate}" title="#{bundle.ViewTournamentsTitle_inscriptionEndDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTournamentsLabel_tournamentStartDate}"/>
+                    <h:outputText value="#{tournamentsController.selected.tournamentStartDate}" title="#{bundle.ViewTournamentsTitle_tournamentStartDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTournamentsLabel_tournamentEndDate}"/>
+                    <h:outputText value="#{tournamentsController.selected.tournamentEndDate}" title="#{bundle.ViewTournamentsTitle_tournamentEndDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTournamentsLabel_idDisciplina}"/>
+                    <h:outputText value="#{tournamentsController.selected.idDisciplina}" title="#{bundle.ViewTournamentsTitle_idDisciplina}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tournamentsController.destroyAndView}" value="#{bundle.ViewTournamentsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="EditTournament" value="#{bundle.ViewTournamentsEditLink}"/>
+                <br />
+                <br />
+                <h:link outcome="ListTournament" value="Regresar"/>
+
+            </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

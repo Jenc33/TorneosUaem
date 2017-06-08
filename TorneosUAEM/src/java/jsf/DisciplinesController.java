@@ -64,7 +64,7 @@ public class DisciplinesController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return "ListDiscipline";
     }
 
     public String prepareView() {
@@ -121,11 +121,11 @@ public class DisciplinesController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return "viewDiscipline";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return "ListDiscipline";
         }
     }
 
@@ -171,13 +171,13 @@ public class DisciplinesController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return "ListDiscipline";
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return "ListDiscipline";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
