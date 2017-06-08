@@ -76,6 +76,8 @@ public class DisciplinesController implements Serializable {
     public String prepareCreate() {
         current = new Disciplines();
         selectedItemIndex = -1;
+        recreatePagination();
+        recreateModel();
         return "ListDiscipline";
     }
 
