@@ -18,7 +18,7 @@ import jpa.entities.Tournaments;
 
 /**
  *
- * @author ingjo
+ * @author equipo Diseño de Sistemas
  */
 public abstract class AbstractFacade<T> {
 
@@ -34,6 +34,11 @@ public abstract class AbstractFacade<T> {
         getEntityManager().persist(entity);
     }
     
+    /**
+     * Asocia el id del equipo a crear con el usuario (capitan) que lo crea
+     * @param id_captain se obtiene de la sesion
+     * @param id_equip se obtiene de la base de datos
+     */
     public void createUpdateCaptain(Integer id_captain, Integer id_equip){
         Equips s = new Equips();
         s.setId(id_equip);
@@ -63,7 +68,13 @@ public abstract class AbstractFacade<T> {
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery(cq).getResultList();
     }
-
+    
+    /**
+     * Realiza la consulta en la base tomando como parametro la fecha
+     * ingresada por el usuario
+     * @param id fecha obtenida del form
+     * @return una lista de resultados
+     */
     public List<Tournaments> findDate(String id) {
         javax.persistence.criteria.CriteriaQuery <Tournaments> cq = getEntityManager().getCriteriaBuilder().createQuery(Tournaments.class);
         Root<Tournaments> c = cq.from(Tournaments.class);
@@ -73,6 +84,12 @@ public abstract class AbstractFacade<T> {
         return getEntityManager().createQuery(cq).getResultList();
     }
     
+    /**
+     * Realiza la consulta en la base de datos tomando como parametro la 
+     * disicplina
+     * @param name nombre de la disciplina a buscar obtenida del form
+     * @return lista de torneos que pertenecen a la disciplina
+     */
     public List<Tournaments> findDiscipline(String name) {
         javax.persistence.criteria.CriteriaQuery <Disciplines> cq = getEntityManager().getCriteriaBuilder().createQuery(Disciplines.class);
         Root<Disciplines> c = cq.from(Disciplines.class);
@@ -90,6 +107,12 @@ public abstract class AbstractFacade<T> {
         return getEntityManager().createQuery(ct).getResultList();
     }
     
+    /**
+     * Realiza la consulta a la base de datos tomando como parametro
+     * el nombre del torneo
+     * @param name nombre del torneo obtenido del form 
+     * @return lista de torneos con el nombre a buscar
+     */
     public List<Tournaments> findName(String name) {
         javax.persistence.criteria.CriteriaQuery <Tournaments> cq = getEntityManager().getCriteriaBuilder().createQuery(Tournaments.class);
         Root<Tournaments> c = cq.from(Tournaments.class);

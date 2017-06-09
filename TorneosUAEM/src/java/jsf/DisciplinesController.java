@@ -21,7 +21,7 @@ import javax.faces.model.SelectItem;
 import jpa.entities.Tournaments;
 /**
  * 
- * @author Equipo de Diseño de Sistemas
+ * 
  * @version 2.0 9 de junio del 2017
  */
 @Named("disciplinesController")

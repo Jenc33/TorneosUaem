@@ -118,7 +118,10 @@ public class StudentsController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
-    
+    /**
+     * Muestra los datos del estudiante a eliminarse del equipo
+     * @return vista a estudiante 
+     */
     public String prepareView2() {
         current = (Students) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -142,6 +145,10 @@ public class StudentsController implements Serializable {
         }
     }
     
+    /**
+     * control para verificar numero de integrantes en el equipo
+     * @return vistaUsuario o vista de creación 
+     */
     public String prepareCreate2() {
         current = new Students();
         selectedItemIndex = -1;
@@ -151,7 +158,10 @@ public class StudentsController implements Serializable {
             return "/vistaUsuario";
         }
     }
-
+    /**
+     * Creación del alumno por equipo
+     * @return preparacion a creacion de un uevo integrante o salida
+     */
     public String create2() {
         this.setIdEquip((Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idEquip"));
         this.setNoMembers((Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("MembersEquip"));
@@ -176,12 +186,21 @@ public class StudentsController implements Serializable {
         return "Edit";
     }
     
+    /**
+     * preparación para eliminación de integrante
+     * @return llamada a metodo update2()
+     * @see update2()
+     */
     public String prepareEdit2() {
         current = (Students) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return update2();
     }
     
+    /**
+     * Desvinculación de alumno de un equipo
+     * @return 
+     */
     public String update2() {
         try {
             current.setIdEquip(null);
@@ -204,7 +223,11 @@ public class StudentsController implements Serializable {
             return null;
         }
     }
-
+    
+    /**
+     * Inicio de sesión
+     * @return vistas de acuerdo al nivel de usuario
+     */
     public String sessionStart() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -240,19 +263,31 @@ public class StudentsController implements Serializable {
         }
         return "registro?faces-redirect=true";
     }
-
+    
+    /**
+     * Detención de la sesión de administrador
+     * @return redireccion a la pagina principal
+     */
     public String sessionStop() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         loggedIn = false;
         return "login?faces-redirect=true";
     }
     
+    /**
+     * Detención de la sesión de usuario
+     * @return redirección a la pagina principal
+     */
     public String sessionStop2() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         loggedIn2 = false;
         return "login?faces-redirect=true";
     }
-
+    
+    /**
+     * Verificación de una sesión iniciada por parte del administrador
+     * @param event 
+     */
     public void checkLogin(ComponentSystemEvent event) {
         if (!loggedIn) {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -263,6 +298,10 @@ public class StudentsController implements Serializable {
         }
     }
     
+    /**
+     * Verificación de una sesión iniciada por parte del usuario
+     * @param event 
+     */
     public void checkLogin2(ComponentSystemEvent event) {
         if (!loggedIn2) {
             FacesContext context = FacesContext.getCurrentInstance();
