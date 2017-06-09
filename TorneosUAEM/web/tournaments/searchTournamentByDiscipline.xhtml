@@ -34,13 +34,14 @@
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
                     <div align="center">
-
+                        <h:inputText id="name" value="#{disciplinesController.selected.name}" title="#{bundle.CreateDisciplinesTitle_name}" required="true" requiredMessage="#{bundle.CreateDisciplinesRequiredMessage_name}"/>
+                        <h:commandLink action="#{disciplinesController.prepareName()}" value="#{bundle.ListTournamentsViewLink}"/>
                     </div>
                     <br />
                     <br />
-                    <h:outputText escape="false" value="#{bundle.ListTournamentsEmpty}" rendered="#{tournamentsController.items.rowCount == 0}"/>
-                    <h:panelGroup rendered="#{tournamentsController.items.rowCount > 0}">
-                        <h:dataTable value="#{tournamentsController.items3}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 0px">
+                    <h:outputText escape="false" value="#{bundle.ListTournamentsEmpty}" rendered="#{disciplinesController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{disciplinesController.items.rowCount > 0}">
+                        <h:dataTable value="#{disciplinesController.items2}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 0px">
                             <div align="center">
                                 <h:column>
                                     <f:facet name="header">

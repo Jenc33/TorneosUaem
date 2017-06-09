@@ -6,6 +6,7 @@ import jsf.util.PaginationHelper;
 import jpa.session.DisciplinesFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,18 +18,24 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import jpa.entities.Tournaments;
 
 @Named("disciplinesController")
 @SessionScoped
 public class DisciplinesController implements Serializable {
 
     private Disciplines current;
-    private DataModel items = null;
+    private DataModel items = null; 
     @EJB
     private jpa.session.DisciplinesFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private List<Tournaments> d;
 
+    public List<Tournaments> getT() {
+        return d ;
+    }
+    
     public DisciplinesController() {
     }
 
@@ -62,6 +69,19 @@ public class DisciplinesController implements Serializable {
         return pagination;
     }
 
+    public String prepareName(){
+        try{
+            System.out.println("MIRA DISCIPLINE: "+current.getName());
+            String name = String.valueOf(current.getName());
+            System.out.println("NAME DISCIPLINE:  "+name);
+            this.d = getFacade().findDiscipline(name);
+            return "searchTournamentsByDiscipline";
+        } catch (Exception e){
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            return "error";
+        }
+    }
+    
     public String prepareList() {
         recreateModel();
         return "ListDiscipline";
@@ -160,6 +180,10 @@ public class DisciplinesController implements Serializable {
             items = getPagination().createPageDataModel();
         }
         return items;
+    }
+    
+    public List<Tournaments> getItems2() {
+        return getT();
     }
 
     private void recreateModel() {

@@ -180,17 +180,11 @@ public class TournamentsController implements Serializable {
         return getT();
     }
 
-    public List<Tournaments> getItems3() {
+    /*public List<Tournaments> getItems3() {
         List<Tournaments> t = getFacade().findDiscipline("DotA 2");
         return t;
-    }
-
-    public List<Tournaments> getItems4() {
-        List<Tournaments> t = getFacade().findName("Torneo Dota 2");
-        return t;
-    }
-
-    
+    }*/
+ 
     public String prepareDate(){
         try{
             Calendar calendar = Calendar.getInstance();
@@ -198,9 +192,9 @@ public class TournamentsController implements Serializable {
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             DateFormat df = new SimpleDateFormat("YYYY/MM/dd");
             String reportDate = df.format(calendar.getTime());
-            /*System.out.println("FECHA 1: " + current.getInscriptionStartDate().toString());
+            System.out.println("FECHA 1: " + current.getInscriptionStartDate().toString());
             System.out.println("FECHA 2: " + reportDate);
-            System.out.println("FECHA 3: " + calendar.getTime().toString());*/
+            System.out.println("FECHA 3: " + calendar.getTime().toString());
             this.t = getFacade().findDate(reportDate);
             return "searchTournamentsByDate";
         } catch (Exception e){
@@ -208,6 +202,20 @@ public class TournamentsController implements Serializable {
             return "error";
         }
     }
+    
+    public String prepareName(){
+        try{
+            System.out.println("MIRA: "+current.getName());
+            String name = String.valueOf(current.getName());
+            System.out.println("NAME:  "+name);
+            this.t = getFacade().findName(name);
+            return "searchTournamentsByName";
+        } catch (Exception e){
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            return "error";
+        }
+    }
+    
     public String prepareRules() {
         current = (Tournaments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
