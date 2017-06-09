@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -25,9 +26,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
+
 
 @Named("studentsController")
 @SessionScoped
@@ -41,6 +40,21 @@ public class StudentsController implements Serializable {
     private int selectedItemIndex;
     private boolean loggedIn;
     private boolean loggedIn2;
+    
+    private String username;
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 
     public StudentsController() {
     }
@@ -132,8 +146,12 @@ public class StudentsController implements Serializable {
                         context.getExternalContext().getSessionMap().put("level", student.getLevel());
                         if (student.getLevel() == 1) {
                             loggedIn = true;
+                            username = student.getUsername();
+                            this.id = student.getId();
                             return "vistaAdmin?faces-redirect=true";
                         } else {
+                            username = student.getUsername();
+                            this.id = student.getId();
                             loggedIn2 = true;
                             return "vistaUsuario?faces-redirect=true";
                         }

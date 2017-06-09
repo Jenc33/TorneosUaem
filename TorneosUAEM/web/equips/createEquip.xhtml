@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Crea tu equipo
+            </ui:define>
+
+            <ui:define name="header">
+                eSports Uaemex
+            </ui:define>
+
+            <ui:define name="nav">
+            </ui:define>
+
+            <ui:define name="title2">
+                Crea tu Equipo y únelo a un torneo
+            </ui:define>
+
+            <ui:define name="sub-title">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.CreateEquipsLabel_idCapitain}" for="idCapitain" />
+                        <h:inputText id="idCapitain" value="#{studetsController.id}" title="#{bundle.CreateEquipsTitle_idCapitain}" required="true" requiredMessage="#{bundle.CreateEquipsRequiredMessage_idCapitain}"/>
+                        <h:outputLabel value="#{bundle.CreateEquipsLabel_name}" for="name" />
+                        <h:inputText id="name" value="#{equipsController.selected.name}" title="#{bundle.CreateEquipsTitle_name}" required="true" requiredMessage="#{bundle.CreateEquipsRequiredMessage_name}"/>
+                        <h:outputLabel value="#{bundle.CreateEquipsLabel_idTournament}" for="idTournament" />
+                        <h:selectOneMenu id="idTournament" value="#{equipsController.selected.idTournament}" title="#{bundle.CreateEquipsTitle_idTournament}" required="true" requiredMessage="#{bundle.CreateEquipsRequiredMessage_idTournament}">
+                            <f:selectItems value="#{tournamentsController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

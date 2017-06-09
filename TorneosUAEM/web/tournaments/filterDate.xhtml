@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Filtra tu Fecha
+            </ui:define>
+
+            <ui:define name="header">
+                eSports UAEMex
+            </ui:define>
+
+            <ui:define name="nav">
+            </ui:define>
+
+            <ui:define name="title2">
+                Filtra tu Fecha por Inicio de Inscripciones
+            </ui:define>
+
+            <ui:define name="sub-title">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:outputLabel value="#{bundle.CreateTournamentsLabel_inscriptionStartDate}" for="inscriptionStartDate" />
+                    <h:inputText id="inscriptionStartDate" value="#{tournamentsController.selected.inscriptionStartDate}" title="#{bundle.CreateTournamentsTitle_inscriptionStartDate}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_inscriptionStartDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:commandLink action="#{tournamentsController.items10}" value="#{bundle.CreateTournamentsSaveLink}" />
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

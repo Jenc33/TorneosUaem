@@ -6,6 +6,8 @@ import jsf.util.PaginationHelper;
 import jpa.session.TournamentsFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -29,6 +31,16 @@ public class TournamentsController implements Serializable {
     private jpa.session.TournamentsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private List<Tournaments> t;
+
+    public List<Tournaments> getT() {
+        return t;
+    }
+
+    public void setT(List<Tournaments> t) {
+        this.t = t;
+    }
 
     public TournamentsController() {
     }
@@ -131,6 +143,18 @@ public class TournamentsController implements Serializable {
             return "ListTournament";
         }
     }
+    
+    public String getItems10(){
+        try{
+            DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
+            String reportDate = df.format(current.getInscriptionStartDate());
+            this.t = getFacade().findDate(reportDate);
+            return "tournaments?searchTournamentsByDate?faces-redirect=true";
+        } catch (Exception e){
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            return "error";
+        }
+    }
 
     private void performDestroy() {
         try {
@@ -164,8 +188,7 @@ public class TournamentsController implements Serializable {
     }
 
     public List<Tournaments> getItems2() {
-        List<Tournaments> t = getFacade().findDate("2017/06/07");
-        return t;
+        return getT();
     }
 
     public List<Tournaments> getItems3() {
