@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Eliminar Usuario
+            </ui:define>
+
+            <ui:define name="header">
+                eSports UAEMex
+            </ui:define>
+
+            <ui:define name="nav">
+            </ui:define>
+
+            <ui:define name="title2">
+                Selecciona al alumno que deseas desvincular
+            </ui:define>
+
+            <ui:define name="sub-title">
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewStudentsLabel_username}"/>
+                    <h:outputText value="#{studentsController.selected.username}" title="#{bundle.ViewStudentsTitle_username}"/>
+                    <h:outputText value="#{bundle.ViewStudentsLabel_name}"/>
+                    <h:outputText value="#{studentsController.selected.name}" title="#{bundle.ViewStudentsTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewStudentsLabel_lastName}"/>
+                    <h:outputText value="#{studentsController.selected.lastName}" title="#{bundle.ViewStudentsTitle_lastName}"/>
+                    <h:outputText value="#{bundle.ViewStudentsLabel_accountNumber}"/>
+                    <h:outputText value="#{studentsController.selected.accountNumber}" title="#{bundle.ViewStudentsTitle_accountNumber}"/>
+                    <h:outputText value="#{bundle.ViewStudentsLabel_idEquip}"/>
+                    <h:outputText value="#{studentsController.selected.idEquip}" title="#{bundle.ViewStudentsTitle_idEquip}"/>
+                </h:panelGrid>
+                <br />
+                <h:link outcome="deleteStudentEquip" value="#{bundle.ViewStudentsIndexLink}"/>
+
+            </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

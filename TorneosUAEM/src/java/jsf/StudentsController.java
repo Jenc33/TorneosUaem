@@ -118,6 +118,12 @@ public class StudentsController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
+    
+    public String prepareView2() {
+        current = (Students) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return "viewStudent";
+    }
 
     public String prepareCreate() {
         current = new Students();
@@ -168,6 +174,24 @@ public class StudentsController implements Serializable {
         current = (Students) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
+    }
+    
+    public String prepareEdit2() {
+        current = (Students) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return update2();
+    }
+    
+    public String update2() {
+        try {
+            current.setIdEquip(null);
+            getFacade().edit(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("StudentsUpdated"));
+            return "deleteStudentEquip";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
     }
 
     public String update() {
