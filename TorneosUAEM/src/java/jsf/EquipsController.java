@@ -17,6 +17,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import jpa.entities.Disciplines;
+import jpa.entities.Tournaments;
 
 @Named("equipsController")
 @SessionScoped
@@ -81,7 +83,15 @@ public class EquipsController implements Serializable {
 
     public String create() {
         try {
+            Integer id_captain = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("id");
+            current.setIdCapitain(id_captain);
+            Tournaments t = current.getIdTournament();
+            Disciplines d = t.getIdDisciplina();
+            Integer countMeembers = d.getNoMembers();
+            
             getFacade().create(current);
+            System.out.println("ID: "+current.getId());
+            getFacade().updateCapitan(id_captain, current.getId());
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("EquipsCreated"));
             return prepareCreate();
         } catch (Exception e) {

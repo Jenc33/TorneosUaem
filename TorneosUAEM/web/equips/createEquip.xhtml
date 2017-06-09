@@ -30,14 +30,13 @@
             <ui:define name="content">
                 <h:form>
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="#{bundle.CreateEquipsLabel_idCapitain}" for="idCapitain" />
-                        <h:inputText id="idCapitain" value="#{studetsController.id}" title="#{bundle.CreateEquipsTitle_idCapitain}" required="true" requiredMessage="#{bundle.CreateEquipsRequiredMessage_idCapitain}"/>
                         <h:outputLabel value="#{bundle.CreateEquipsLabel_name}" for="name" />
                         <h:inputText id="name" value="#{equipsController.selected.name}" title="#{bundle.CreateEquipsTitle_name}" required="true" requiredMessage="#{bundle.CreateEquipsRequiredMessage_name}"/>
                         <h:outputLabel value="#{bundle.CreateEquipsLabel_idTournament}" for="idTournament" />
                         <h:selectOneMenu id="idTournament" value="#{equipsController.selected.idTournament}" title="#{bundle.CreateEquipsTitle_idTournament}" required="true" requiredMessage="#{bundle.CreateEquipsRequiredMessage_idTournament}">
                             <f:selectItems value="#{tournamentsController.itemsAvailableSelectOne}"/>
                         </h:selectOneMenu>
+                        <h:commandLink action="#{equipsController.create}" value="#{bundle.CreateEquipsSaveLink}" />
                     </h:panelGrid>
                 </h:form>
             </ui:define>
