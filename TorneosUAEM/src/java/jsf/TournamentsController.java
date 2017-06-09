@@ -8,6 +8,7 @@ import jpa.session.TournamentsFacade;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -192,10 +193,14 @@ public class TournamentsController implements Serializable {
     
     public String prepareDate(){
         try{
-            SimpleDateFormat df = new SimpleDateFormat("YYYY/MM/dd");
-            String reportDate = df.format(current.getInscriptionStartDate());
-            System.out.println("FECHA 1: " + current.getInscriptionStartDate().toString());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(current.getInscriptionStartDate());
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            DateFormat df = new SimpleDateFormat("YYYY/MM/dd");
+            String reportDate = df.format(calendar.getTime());
+            /*System.out.println("FECHA 1: " + current.getInscriptionStartDate().toString());
             System.out.println("FECHA 2: " + reportDate);
+            System.out.println("FECHA 3: " + calendar.getTime().toString());*/
             this.t = getFacade().findDate(reportDate);
             return "searchTournamentsByDate";
         } catch (Exception e){
