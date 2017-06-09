@@ -91,7 +91,7 @@ public class EquipsController implements Serializable {
             
             getFacade().create(current);
             System.out.println("ID: "+current.getId());
-            getFacade().updateCapitan(id_captain, current.getId());
+            getFacade().createUpdateCaptain(id_captain, current.getId());
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("EquipsCreated"));
             return prepareCreate();
         } catch (Exception e) {
