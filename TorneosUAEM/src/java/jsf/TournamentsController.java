@@ -169,7 +169,7 @@ public class TournamentsController implements Serializable {
     }
 
     public List<Tournaments> getItems3() {
-        List<Tournaments> t = getFacade().findDiscipline("League of Legends");
+        List<Tournaments> t = getFacade().findDiscipline("DotA 2");
         return t;
     }
 

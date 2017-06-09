@@ -135,7 +135,7 @@ public class Disciplines implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.Disciplines[ id=" + id + " ]";
+        return name;
     }
     
 }
