@@ -197,7 +197,7 @@ public class Tournaments implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.Tournaments[ id=" + id + " ]";
+        return name;
     }
     
 }
