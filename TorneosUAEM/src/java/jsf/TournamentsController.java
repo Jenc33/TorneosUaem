@@ -143,18 +143,6 @@ public class TournamentsController implements Serializable {
             return "ListTournament";
         }
     }
-    
-    public String getItems10(){
-        try{
-            DateFormat df = new SimpleDateFormat("yyyy/mm/dd");
-            String reportDate = df.format(current.getInscriptionStartDate());
-            this.t = getFacade().findDate(reportDate);
-            return "tournaments?searchTournamentsByDate?faces-redirect=true";
-        } catch (Exception e){
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
-            return "error";
-        }
-    }
 
     private void performDestroy() {
         try {
@@ -201,6 +189,20 @@ public class TournamentsController implements Serializable {
         return t;
     }
 
+    
+    public String prepareDate(){
+        try{
+            SimpleDateFormat df = new SimpleDateFormat("yyyy/mm/dd");
+            String reportDate = df.format(current.getInscriptionStartDate());
+            System.out.println("FEHCA 1: "+current.getInscriptionStartDate());
+            System.out.println("FECHA; "+reportDate);
+            this.t = getFacade().findDate(reportDate);
+            return "searchTournamentsByDate";
+        } catch (Exception e){
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            return "error";
+        }
+    }
     public String prepareRules() {
         current = (Tournaments) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();

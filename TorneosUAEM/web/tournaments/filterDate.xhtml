@@ -31,10 +31,9 @@
                 <h:form>
                     <h:outputLabel value="#{bundle.CreateTournamentsLabel_inscriptionStartDate}" for="inscriptionStartDate" />
                     <h:inputText id="inscriptionStartDate" value="#{tournamentsController.selected.inscriptionStartDate}" title="#{bundle.CreateTournamentsTitle_inscriptionStartDate}" required="true" requiredMessage="#{bundle.CreateTournamentsRequiredMessage_inscriptionStartDate}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="MM/dd/yyyy"/>
                     </h:inputText>
-                    <h:commandLink action="#{tournamentsController.items10}" value="#{bundle.CreateTournamentsSaveLink}" />
-                </h:form>
+                    <h:commandLink action="#{tournamentsController.prepareDate()}" value="#{bundle.ListTournamentsViewLink}"/></h:form>
             </ui:define>
 
         </ui:composition>
