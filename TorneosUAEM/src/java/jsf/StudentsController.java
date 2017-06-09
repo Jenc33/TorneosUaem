@@ -26,6 +26,7 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import jpa.entities.Equips;
 
 
 @Named("studentsController")
@@ -43,7 +44,25 @@ public class StudentsController implements Serializable {
     
     private String username;
     private Integer id;
+    private Integer noMembers;
+    private Integer idEquip;
 
+    public Integer getNoMembers() {
+        return noMembers;
+    }
+
+    public void setNoMembers(Integer noMembers) {
+        this.noMembers = noMembers;
+    }
+
+    public Integer getIdEquip() {
+        return idEquip;
+    }
+
+    public void setIdEquip(Integer idEquip) {
+        this.idEquip = idEquip;
+    } 
+    
     public Integer getId() {
         return id;
     }
@@ -111,6 +130,34 @@ public class StudentsController implements Serializable {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("StudentsCreated"));
             return prepareCreate();
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+    
+    public String prepareCreate2() {
+        current = new Students();
+        selectedItemIndex = -1;
+        if(this.noMembers > 0 ){
+            return "createStudentsByEquip";
+        }else{
+            return "/vistaUsuario";
+        }
+    }
+
+    public String create2() {
+        this.setIdEquip((Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idEquip"));
+        this.setNoMembers((Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("MembersEquip"));
+        try {
+            Equips e2 = new Equips();
+            e2.setId(idEquip);
+            current.setIdEquip(e2);
+            getFacade().create(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("StudentsCreated"));
+            this.noMembers--;
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("MembersEquip", this.noMembers);
+            return prepareCreate2();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -287,6 +334,7 @@ public class StudentsController implements Serializable {
     public Students getStudents(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
 
     @FacesConverter(forClass = Students.class)
     public static class StudentsControllerConverter implements Converter {

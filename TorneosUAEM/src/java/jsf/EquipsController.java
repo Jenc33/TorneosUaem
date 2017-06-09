@@ -30,6 +30,8 @@ public class EquipsController implements Serializable {
     private jpa.session.EquipsFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int noMembers;
+    private Integer idEquip;
 
     public EquipsController() {
     }
@@ -78,7 +80,7 @@ public class EquipsController implements Serializable {
     public String prepareCreate() {
         current = new Equips();
         selectedItemIndex = -1;
-        return "Create";
+        return "/vistaUsuario";
     }
 
     public String create() {
@@ -91,8 +93,12 @@ public class EquipsController implements Serializable {
             
             getFacade().create(current);
             System.out.println("ID: "+current.getId());
-            getFacade().createUpdateCaptain(id_captain, current.getId());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("EquipsCreated"));
+            //getFacade().createUpdateCaptain(id_captain, current.getId());
+            this.noMembers = d.getNoMembers() - 1;
+            this.idEquip = current.getId();
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idEquip", this.idEquip);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("MembersEquip", this.noMembers);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("EquipsCreated"));    
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
