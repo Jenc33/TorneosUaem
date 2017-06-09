@@ -192,10 +192,10 @@ public class TournamentsController implements Serializable {
     
     public String prepareDate(){
         try{
-            SimpleDateFormat df = new SimpleDateFormat("yyyy/mm/dd");
+            SimpleDateFormat df = new SimpleDateFormat("YYYY/MM/dd");
             String reportDate = df.format(current.getInscriptionStartDate());
-            System.out.println("FEHCA 1: "+current.getInscriptionStartDate());
-            System.out.println("FECHA; "+reportDate);
+            System.out.println("FECHA 1: " + current.getInscriptionStartDate().toString());
+            System.out.println("FECHA 2: " + reportDate);
             this.t = getFacade().findDate(reportDate);
             return "searchTournamentsByDate";
         } catch (Exception e){
