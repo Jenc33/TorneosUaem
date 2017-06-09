@@ -93,7 +93,7 @@ public class EquipsController implements Serializable {
             
             getFacade().create(current);
             System.out.println("ID: "+current.getId());
-            //getFacade().createUpdateCaptain(id_captain, current.getId());
+            getFacade().createUpdateCaptain(id_captain, current.getId());
             this.noMembers = d.getNoMembers() - 1;
             this.idEquip = current.getId();
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idEquip", this.idEquip);
