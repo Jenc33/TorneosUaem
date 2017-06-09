@@ -7,9 +7,13 @@ package jpa.session;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import jpa.entities.Disciplines;
+import jpa.entities.Equips;
+import jpa.entities.Students;
 import jpa.entities.Tournaments;
 
 /**
@@ -31,8 +35,14 @@ public abstract class AbstractFacade<T> {
     }
     
     public void createUpdateCaptain(Integer id_captain, Integer id_equip){
-        
-        
+        Equips s = new Equips();
+        s.setId(id_equip);
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaUpdate<Students> update = cb.createCriteriaUpdate(Students.class);
+        Root e = update.from(Students.class);
+        update.set("idEquip", s);
+        update.where(getEntityManager().getCriteriaBuilder().equal(e.get("id"), id_captain));
+        getEntityManager().createQuery(update).executeUpdate();
     }
            
 

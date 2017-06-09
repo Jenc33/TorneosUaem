@@ -34,7 +34,11 @@ public class TournamentsController implements Serializable {
     private int selectedItemIndex;
     
     private List<Tournaments> t;
-
+    
+    /**
+     * 
+     * @return lista de torneos que seran mostrados en las consultas 
+     */
     public List<Tournaments> getT() {
         return t;
     }
@@ -175,15 +179,15 @@ public class TournamentsController implements Serializable {
         }
         return items;
     }
-
+    
+    /**
+     * Obtención del arreglo de tournaments para mostrarlos
+     * @return llamada al metodo get()
+     * @see getT()
+     */
     public List<Tournaments> getItems2() {
         return getT();
     }
-
-    /*public List<Tournaments> getItems3() {
-        List<Tournaments> t = getFacade().findDiscipline("DotA 2");
-        return t;
-    }*/
  
     public String prepareDate(){
         try{

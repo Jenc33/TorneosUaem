@@ -19,7 +19,11 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import jpa.entities.Tournaments;
-
+/**
+ * 
+ * @author Equipo de Diseño de Sistemas
+ * @version 2.0 9 de junio del 2017
+ */
 @Named("disciplinesController")
 @SessionScoped
 public class DisciplinesController implements Serializable {
@@ -31,7 +35,11 @@ public class DisciplinesController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Tournaments> d;
-
+    
+    /**
+     * 
+     * @return lista de torneos que seran mostrados para las consultas
+     */
     public List<Tournaments> getT() {
         return d ;
     }
@@ -182,6 +190,11 @@ public class DisciplinesController implements Serializable {
         return items;
     }
     
+    /**
+     * recupera el arreglo de tournaments para mostrarlos
+     * @return llamada al metodo getT()
+     * @see getT()
+     */
     public List<Tournaments> getItems2() {
         return getT();
     }
